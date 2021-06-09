@@ -3,7 +3,7 @@ fn main() {
 
     println!("{:?}", hash_map_instance);
 
-    let result = hash_map_instance.get(String::from("Engi"));
+    let result = hash_map_instance.get(&String::from("Engi"));
 
     match result {
         Some(value) => println!("{}", value),
@@ -32,10 +32,10 @@ where
         Self(vec![])
     }
 
-    fn get(&self, key: K) -> Option<&V> {
+    fn get(&self, key: &K) -> Option<&V> {
         let table = self.0.clone();
 
-        let index = table.into_iter().position(|(k, _)| k == key);
+        let index = table.into_iter().position(|(k, _)| k == *key);
 
         index.map(|index| &self.0[index].1)
     }
